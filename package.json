@@ -1,0 +1,65 @@
+{
+  "name": "internet-customers-api",
+  "version": "1.0.0",
+  "description": "Handles customer registration, authentication and authorization.",
+  "main": "server.js",
+  "scripts": {
+    "build:development": "tsc --outDir dist/development/",
+    "build:staging": "tsc --outDir dist/staging/",
+    "build:production": "tsc --outDir dist/production/",
+    "dev": "npx nodemon --watch src src/server.ts",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "prettier": "prettier --config .prettierrc.js ./**/*",
+    "prettier:app": "npm run prettier:check",
+    "prettier:check": "npm run prettier -- --check",
+    "prettier:write": "npm run prettier -- --write",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/krisbelangernelson/internet-customers-api.git"
+  },
+  "keywords": [],
+  "author": "krisbelangernelson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/krisbelangernelson/internet-customers-api/issues"
+  },
+  "homepage": "https://github.com/krisbelangernelson/internet-customers-api#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "dotenv-override": "^5.0.1",
+    "express": "^4.18.2",
+    "express-async-errors": "^3.1.1",
+    "express-winston": "^4.2.0",
+    "jsonwebtoken": "^9.0.2",
+    "module-alias": "^2.2.3",
+    "pg": "^8.11.3",
+    "sequelize": "^6.37.1",
+    "winston": "^3.11.0"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/body-parser": "^1.19.5",
+    "@types/compression": "^1.7.5",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^9.0.5",
+    "@types/module-alias": "^2.0.4",
+    "@types/node": "^20.11.17",
+    "@types/pg": "^8.11.0",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-config-standard-with-typescript": "^43.0.1",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-prettier": "^5.1.3",
+    "nodemon": "^3.0.3",
+    "prettier": "^3.2.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+}
