@@ -4,12 +4,12 @@ import { NotFoundError } from '@/utils/httpErrors'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
-const registerCustomer = async (body: CustomerBody): Promise<{ code: string; message: string }> => {
+export const registerCustomer = async (body: CustomerBody): Promise<{ code: string; message: string }> => {
   await createCustomer(body)
   return { code: '0', message: 'User registered successfully.' }
 }
 
-const loginCustomer = async (body: Login): Promise<LoginResponse> => {
+export const loginCustomer = async (body: Login): Promise<LoginResponse> => {
   const customer = await getCustomerByEmail(body.email)
 
   if (customer.length < 1) {
@@ -38,5 +38,3 @@ const loginCustomer = async (body: Login): Promise<LoginResponse> => {
     phone
   }
 }
-
-export default { registerCustomer, loginCustomer }

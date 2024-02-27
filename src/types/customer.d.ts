@@ -4,6 +4,7 @@ export interface Customer {
   last_name: string
   email: string
   password: string
+  phone: string
   create_date: string
   update_date: string
 }
