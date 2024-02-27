@@ -4,9 +4,6 @@ export interface Customer {
   last_name: string
   email: string
   password: string
-  phone: string
-  credit_card_company: string
-  credit_card_number: string
   create_date: string
   update_date: string
 }
@@ -15,8 +12,8 @@ export interface CustomerBody {
   firstName: string
   lastName: string
   email: string
-  password: string
   phone: string
+  password: string
 }
 
 export interface Login {

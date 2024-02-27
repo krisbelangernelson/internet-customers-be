@@ -20,8 +20,8 @@ import config from './config'
 
 const app = express()
 
-if (process.env.SECRET === undefined) {
-  logger.error('Missing SECRET env var')
+if (process.env.JWT_SECRET === undefined) {
+  logger.error('Missing JWT_SECRET env var')
 }
 
 app.use(cors(config.cors))

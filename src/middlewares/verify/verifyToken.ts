@@ -20,7 +20,7 @@ export const verifyToken = (req: UserRequest, res: Response, next: NextFunction)
       throw new ForbiddenError('Token must be a string, not be an array')
     }
 
-    jwt.verify(token, String(process.env.SECRET), (error, decoded) => {
+    jwt.verify(token, String(process.env.JWT_SECRET), (error, decoded) => {
       if (error !== undefined) {
         throw new UnauthorizedError('Unauthorized')
       }

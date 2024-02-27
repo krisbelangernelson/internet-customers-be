@@ -22,7 +22,7 @@ const loginCustomer = async (body: Login): Promise<LoginResponse> => {
   if (!isValid) {
     throw new NotFoundError(undefined, undefined, undefined, 'No account found with that username and password')
   }
-  const accessToken = jwt.sign({ id: id.toString() }, String(process.env.SECRET), {
+  const accessToken = jwt.sign({ id: id.toString() }, String(process.env.JWT_SECRET), {
     algorithm: 'HS256',
     allowInsecureKeySizes: true,
     expiresIn: 86400 // 1 day
