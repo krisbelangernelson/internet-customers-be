@@ -31,3 +31,7 @@ export interface LoginResponse {
   accessToken: string
   code: string
 }
+
+export interface EmailExists {
+  email: string
+}

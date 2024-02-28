@@ -1,5 +1,5 @@
 import { createCustomer, getCustomerByEmail } from '@/db/queries/customer'
-import type { CustomerBody, Login, LoginResponse } from '@/types/customer'
+import type { CustomerBody, Login, LoginResponse, EmailExists } from '@/types/customer'
 import { NotFoundError } from '@/utils/httpErrors'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
@@ -10,7 +10,6 @@ export const registerCustomer = async (body: CustomerBody): Promise<{ code: stri
 }
 
 export const loginCustomer = async (body: Login): Promise<LoginResponse> => {
-  console.log('body', body)
   const customer = await getCustomerByEmail(body.email)
 
   if (customer.length < 1) {
@@ -36,4 +35,9 @@ export const loginCustomer = async (body: Login): Promise<LoginResponse> => {
     email,
     phone
   }
+}
+
+export const emailExists = async (body: EmailExists): Promise<{ code: string; exists: boolean }> => {
+  const customer = await getCustomerByEmail(body.email)
+  return { code: '0', exists: customer.length > 0 }
 }
