@@ -2,7 +2,7 @@ import type { Request, Response } from 'express'
 import * as customerService from '@/services/customerService'
 import { errorResponses } from '@/utils/httpErrors/errorResponses'
 import { type Error } from '@/types/error'
-import type { CustomerBody, Login, EmailExists } from '@/types/customer'
+import type { CustomerBody, Login, CustomerExists } from '@/types/customer'
 
 export const registerCustomer = async (req: Request, res: Response): Promise<void> => {
   await customerService
@@ -28,9 +28,9 @@ export const loginCustomer = async (req: Request, res: Response): Promise<void> 
     .catch((error: Error) => errorResponses(res, error, 'loginCustomer'))
 }
 
-export const emailExists = async (req: Request, res: Response): Promise<void> => {
+export const customerExists = async (req: Request, res: Response): Promise<void> => {
   await customerService
-    .emailExists(req.body as EmailExists)
+    .customerExists(req.body as CustomerExists)
     .then((results) => res.json(results))
-    .catch((error: Error) => errorResponses(res, error, 'emailExists'))
+    .catch((error: Error) => errorResponses(res, error, 'customerExists'))
 }

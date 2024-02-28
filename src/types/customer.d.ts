@@ -32,6 +32,7 @@ export interface LoginResponse {
   code: string
 }
 
-export interface EmailExists {
-  email: string
+export interface CustomerExists {
+  email?: string
+  phone?: string
 }

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { Router } from 'express'
-import { registerCustomer, loginCustomer, emailExists } from '@/controllers/customerController'
+import { registerCustomer, loginCustomer, customerExists } from '@/controllers/customerController'
 import { verifyRegistration } from '@/middlewares/verify'
 
 const router = Router()
@@ -12,7 +12,7 @@ router.use((_req, res, next) => {
 
 router.post('/register', verifyRegistration.verifyBody, verifyRegistration.verifyEmailNotExist, registerCustomer)
 router.post('/login', loginCustomer)
-router.post('/email-exists', emailExists)
+router.post('/customer-exists', customerExists)
 // TODO: add protected route for jwt token verification
 
 export default router

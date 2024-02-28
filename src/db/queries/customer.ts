@@ -14,6 +14,16 @@ export const getCustomerByEmail = async (email): Promise<Customer[]> => {
   return await Promise.resolve(result.rows)
 }
 
+export const getCustomerByPhone = async (phone): Promise<Customer[]> => {
+  const db = getDb()
+
+  const select = 'SELECT * FROM internet_customer WHERE phone = $1 LIMIT 1'
+
+  const result = await db.query(select, [phone])
+
+  return await Promise.resolve(result.rows)
+}
+
 export const createCustomer = async (params: CustomerBody): Promise<void> => {
   const { firstName, lastName, email, password, phone } = params
   const db = getDb()

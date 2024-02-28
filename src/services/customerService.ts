@@ -1,5 +1,5 @@
-import { createCustomer, getCustomerByEmail } from '@/db/queries/customer'
-import type { CustomerBody, Login, LoginResponse, EmailExists } from '@/types/customer'
+import { createCustomer, getCustomerByEmail, getCustomerByPhone } from '@/db/queries/customer'
+import type { CustomerBody, Login, LoginResponse, CustomerExists } from '@/types/customer'
 import { NotFoundError } from '@/utils/httpErrors'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
@@ -37,7 +37,9 @@ export const loginCustomer = async (body: Login): Promise<LoginResponse> => {
   }
 }
 
-export const emailExists = async (body: EmailExists): Promise<{ code: string; exists: boolean }> => {
-  const customer = await getCustomerByEmail(body.email)
-  return { code: '0', exists: customer.length > 0 }
+export const customerExists = async (body: CustomerExists): Promise<{ emailExists: boolean; phoneExists: boolean }> => {
+  const { email, phone } = body
+  const emailExists = await getCustomerByEmail(email)
+  const phoneExists = await getCustomerByPhone(phone)
+  return { emailExists: emailExists.length > 0, phoneExists: phoneExists.length > 0 }
 }
