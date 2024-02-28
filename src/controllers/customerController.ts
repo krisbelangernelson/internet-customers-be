@@ -14,6 +14,16 @@ export const registerCustomer = async (req: Request, res: Response): Promise<voi
 export const loginCustomer = async (req: Request, res: Response): Promise<void> => {
   await customerService
     .loginCustomer(req.body as Login)
-    .then((results) => res.json(results))
+    .then((results) => {
+      const { accessToken } = results
+      res
+        .status(200)
+        .cookie('accessToken', accessToken, {
+          expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
+          secure: true,
+          httpOnly: true
+        })
+        .json(results)
+    })
     .catch((error: Error) => errorResponses(res, error, 'loginCustomer'))
 }

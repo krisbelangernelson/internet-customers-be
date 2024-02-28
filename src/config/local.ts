@@ -16,6 +16,7 @@ export default {
     timestamp: true
   },
   cors: {
-    origin: 'http://localhost:8080'
+    origin: 'http://localhost:8080',
+    credentials: true
   }
 } satisfies ServerConfigType

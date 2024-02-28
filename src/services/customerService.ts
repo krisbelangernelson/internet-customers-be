@@ -10,6 +10,7 @@ export const registerCustomer = async (body: CustomerBody): Promise<{ code: stri
 }
 
 export const loginCustomer = async (body: Login): Promise<LoginResponse> => {
+  console.log('body', body)
   const customer = await getCustomerByEmail(body.email)
 
   if (customer.length < 1) {
@@ -20,12 +21,10 @@ export const loginCustomer = async (body: Login): Promise<LoginResponse> => {
 
   const isValid = bcrypt.compareSync(body.password, password)
   if (!isValid) {
-    throw new NotFoundError(undefined, undefined, undefined, 'No account found with that username and password')
+    throw new NotFoundError(undefined, undefined, undefined, 'No account found with that email and password')
   }
-  const accessToken = jwt.sign({ id: id.toString() }, String(process.env.JWT_SECRET), {
-    algorithm: 'HS256',
-    allowInsecureKeySizes: true,
-    expiresIn: 86400 // 1 day
+  const accessToken = jwt.sign({ id: id.toString(), firstName, lastName, email }, String(process.env.JWT_SECRET), {
+    expiresIn: '1 days'
   })
 
   return {
