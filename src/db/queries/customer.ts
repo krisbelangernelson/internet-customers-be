@@ -24,8 +24,23 @@ export const getCustomerByPhone = async (phone): Promise<Customer[]> => {
   return await Promise.resolve(result.rows)
 }
 
+export const getCustomerById = async (id): Promise<Customer[]> => {
+  const db = getDb()
+
+  const select = 'SELECT * FROM internet_customer WHERE id = $1 LIMIT 1'
+
+  const result = await db.query(select, [id])
+
+  return await Promise.resolve(result.rows)
+}
+
 export const createCustomer = async (params: CustomerBody): Promise<void> => {
   const { firstName, lastName, email, password, phone } = params
+
+  if (password === undefined) {
+    throw new Error('password is undefined')
+  }
+
   const db = getDb()
 
   const sql = `INSERT INTO internet_customer(

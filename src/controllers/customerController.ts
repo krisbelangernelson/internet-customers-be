@@ -36,5 +36,8 @@ export const customerExists = async (req: Request, res: Response): Promise<void>
 }
 
 export const customerArea = async (req: Request, res: Response): Promise<void> => {
-  await Promise.resolve(res.json({ message: 'ok' }))
+  await customerService
+    .customerArea(req.token)
+    .then((results) => res.json(results))
+    .catch((error: Error) => errorResponses(res, error, 'customerArea'))
 }

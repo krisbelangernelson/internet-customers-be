@@ -2,9 +2,9 @@ import BaseError from './BaseError'
 import { internalError } from '@/constants/errors'
 
 class InternalError extends BaseError {
-  internalError: object | string
+  internalError: object | string | undefined
 
-  constructor(error: Error, code = internalError.code, message = internalError.msg) {
+  constructor(error: Error | undefined, code = internalError.code, message = internalError.msg) {
     super(code, internalError.reason, internalError.status, message)
     this.internalError = error
   }

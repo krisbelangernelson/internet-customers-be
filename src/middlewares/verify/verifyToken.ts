@@ -3,6 +3,7 @@ import type { Request, Response, NextFunction } from 'express'
 import { UnauthorizedError, ForbiddenError } from '@/utils/httpErrors'
 import { errorResponses } from '@/utils/httpErrors/errorResponses'
 import { type Error } from '@/types/error'
+import { type AccessToken } from '@/types/customer'
 
 export const verifyToken = (req: Request, res: Response, next: NextFunction): void => {
   // const token = req.headers['x-access-token']
@@ -23,13 +24,8 @@ export const verifyToken = (req: Request, res: Response, next: NextFunction): vo
         throw new UnauthorizedError('Unauthorized')
       }
 
-      if (
-        decoded !== undefined &&
-        typeof decoded !== 'string' &&
-        decoded.email !== undefined &&
-        req.user !== undefined
-      ) {
-        req.user.email = decoded.email as string
+      if (decoded !== undefined && typeof decoded !== 'string' && decoded.email !== undefined) {
+        req.token = decoded as AccessToken
       }
 
       next()

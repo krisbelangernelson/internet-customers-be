@@ -10,11 +10,12 @@ export interface Customer {
 }
 
 export interface CustomerBody {
+  id?: string
   firstName: string
   lastName: string
   email: string
   phone: string
-  password: string
+  password?: string
 }
 
 export interface Login {
@@ -30,6 +31,13 @@ export interface LoginResponse {
   phone: string
   accessToken: string
   code: string
+}
+
+export interface AccessToken {
+  id: string
+  firstName: string
+  lastName: string
+  email: string
 }
 
 export interface CustomerExists {

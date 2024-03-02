@@ -27,6 +27,7 @@
     "inlineSourceMap": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "typeRoots" : ["./src/types", "./node_modules/@types"]
   }
 }
