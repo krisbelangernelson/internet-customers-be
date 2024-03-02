@@ -7,6 +7,7 @@ require('express-async-errors')
 import './utils/module-alias'
 import cors from 'cors'
 import express from 'express'
+import cookieParser from 'cookie-parser'
 import compression from 'compression'
 import { stringifyInspect } from '@/utils/utils'
 import requestLogger from '@/middlewares/requestLogger'
@@ -28,6 +29,7 @@ app.use(cors(config.cors))
 app.use(compression())
 app.disable('x-powered-by')
 app.use(express.json())
+app.use(cookieParser())
 app.use(express.urlencoded({ extended: true }))
 app.use(requestLogger())
 app.use(config.basePath, routes)

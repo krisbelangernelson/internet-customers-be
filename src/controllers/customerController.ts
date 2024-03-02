@@ -19,7 +19,7 @@ export const loginCustomer = async (req: Request, res: Response): Promise<void> 
       res
         .status(200)
         .cookie('accessToken', accessToken, {
-          expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
+          expires: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000),
           secure: true,
           httpOnly: true
         })
@@ -33,4 +33,8 @@ export const customerExists = async (req: Request, res: Response): Promise<void>
     .customerExists(req.body as CustomerExists)
     .then((results) => res.json(results))
     .catch((error: Error) => errorResponses(res, error, 'customerExists'))
+}
+
+export const customerArea = async (req: Request, res: Response): Promise<void> => {
+  await Promise.resolve(res.json({ message: 'ok' }))
 }

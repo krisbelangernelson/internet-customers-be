@@ -4,12 +4,10 @@ import { UnauthorizedError, ForbiddenError } from '@/utils/httpErrors'
 import { errorResponses } from '@/utils/httpErrors/errorResponses'
 import { type Error } from '@/types/error'
 
-export interface UserRequest extends Request {
-  user: Record<string, string>
-}
-
-export const verifyToken = (req: UserRequest, res: Response, next: NextFunction): void => {
-  const token = req.headers['x-access-token']
+export const verifyToken = (req: Request, res: Response, next: NextFunction): void => {
+  // const token = req.headers['x-access-token']
+  const cookies = req.cookies
+  const token = cookies.accessToken as string
 
   try {
     if (token === undefined) {
@@ -17,16 +15,21 @@ export const verifyToken = (req: UserRequest, res: Response, next: NextFunction)
     }
 
     if (Array.isArray(token)) {
-      throw new ForbiddenError('Token must be a string, not be an array')
+      throw new ForbiddenError('Token must be a string, not an array')
     }
 
     jwt.verify(token, String(process.env.JWT_SECRET), (error, decoded) => {
-      if (error !== undefined) {
+      if (error !== null) {
         throw new UnauthorizedError('Unauthorized')
       }
 
-      if (decoded !== undefined && typeof decoded !== 'string' && decoded.id !== undefined) {
-        req.user.id = decoded.id as string
+      if (
+        decoded !== undefined &&
+        typeof decoded !== 'string' &&
+        decoded.email !== undefined &&
+        req.user !== undefined
+      ) {
+        req.user.email = decoded.email as string
       }
 
       next()

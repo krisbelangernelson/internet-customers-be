@@ -40,7 +40,7 @@ export const conflictError = {
 }
 
 export const unauthorizedError = {
-  code: 'ERR-403',
+  code: 'ERR-401',
   msg: `Unauthorized`,
   reason: 'Unauthorized Error',
   status: httpStatus.UNAUTHORIZED
