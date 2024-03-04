@@ -22,9 +22,13 @@ export const loginCustomer = async (body: Login): Promise<LoginResponse> => {
   if (!isValid) {
     throw new NotFoundError(undefined, undefined, undefined, 'No account found with that email and password')
   }
-  const accessToken = jwt.sign({ id: id.toString(), firstName, lastName, email }, String(process.env.JWT_SECRET), {
-    expiresIn: '1d'
-  })
+  const accessToken = jwt.sign(
+    { id: id.toString(), firstName, lastName, email, phone },
+    String(process.env.JWT_SECRET),
+    {
+      expiresIn: '1d'
+    }
+  )
 
   return {
     accessToken,

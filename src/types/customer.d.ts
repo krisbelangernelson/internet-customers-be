@@ -37,6 +37,7 @@ export interface AccessToken {
   firstName: string
   lastName: string
   email: string
+  phone: string
 }
 
 export interface CustomerExists {
