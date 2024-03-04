@@ -41,6 +41,10 @@ export const loginCustomer = async (req: Request, res: Response): Promise<void> 
   }
 }
 
+export const logout = (_req: Request, res: Response): void => {
+  res.status(200).clearCookie('accessToken').json()
+}
+
 export const customerExists = async (req: Request, res: Response): Promise<void> => {
   await customerService
     .customerExists(req.body as CustomerExists)
