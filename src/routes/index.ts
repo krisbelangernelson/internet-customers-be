@@ -2,6 +2,7 @@
 import { Router, type Request, type Response } from 'express'
 import logger from '@/utils/logger'
 import authRouter from './auth'
+import customerRouter from './customer'
 import { version } from '../../package.json'
 
 const router = Router()
@@ -26,6 +27,7 @@ router.get('/version', (_req, res) => {
 })
 
 router.use('/api/v1/auth', authRouter)
+router.use('/api/v1/customer', customerRouter)
 
 router.get('*', async (req, res) => await invalidRoute(req, res))
 router.post('*', async (req, res) => await invalidRoute(req, res))
