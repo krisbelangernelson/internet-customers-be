@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { Router } from 'express'
 import { registerCustomer, loginCustomer } from '@/controllers/customerController'
-import { verifyRegistration, verifyToken } from '@/middlewares/verify'
+import { verifyRegistration } from '@/middlewares/verify'
 
 const router = Router()
 
@@ -11,6 +11,6 @@ const router = Router()
 // })
 
 router.post('/register', verifyRegistration.verifyBody, verifyRegistration.verifyEmailNotExist, registerCustomer)
-router.post('/login', verifyToken.verifyToken, loginCustomer)
+router.post('/login', loginCustomer)
 
 export default router

@@ -3,7 +3,7 @@ import * as customerService from '@/services/customerService'
 import { errorResponses } from '@/utils/httpErrors/errorResponses'
 import { type Error } from '@/types/error'
 import type { CustomerBody, Login, CustomerExists } from '@/types/customer'
-import getTokenData from '@/utils/tokenData'
+import tokenVerification from '@/utils/tokenVerification'
 
 export const registerCustomer = async (req: Request, res: Response): Promise<void> => {
   await customerService
@@ -13,14 +13,14 @@ export const registerCustomer = async (req: Request, res: Response): Promise<voi
 }
 
 export const loginCustomer = async (req: Request, res: Response): Promise<void> => {
-  const { token } = req
+  const cookies = req.cookies
+  const encodedToken = cookies.accessToken as string
 
-  if (token !== undefined) {
-    const cookies = req.cookies
-    const encodedToken = cookies.accessToken as string
+  if (encodedToken !== undefined) {
+    const decodedToken = tokenVerification(encodedToken)
 
-    res.status(200).json({
-      ...token,
+    res.json({
+      ...decodedToken,
       accessToken: encodedToken
     })
   } else {
