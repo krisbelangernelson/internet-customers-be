@@ -4,9 +4,9 @@ import { NotFoundError, InternalError } from '@/utils/httpErrors'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
-export const registerCustomer = async (body: CustomerBody): Promise<{ code: string; message: string }> => {
-  await createCustomer(body)
-  return { code: '0', message: 'User registered successfully.' }
+export const registerCustomer = async (body: CustomerBody): Promise<{ id: string }> => {
+  const created = await createCustomer(body)
+  return { id: created.id.toString() }
 }
 
 export const loginCustomer = async (body: Login): Promise<LoginResponse> => {
@@ -27,7 +27,6 @@ export const loginCustomer = async (body: Login): Promise<LoginResponse> => {
   })
 
   return {
-    code: '0',
     accessToken,
     id,
     firstName,

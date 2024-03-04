@@ -34,7 +34,7 @@ export const getCustomerById = async (id): Promise<Customer[]> => {
   return await Promise.resolve(result.rows)
 }
 
-export const createCustomer = async (params: CustomerBody): Promise<void> => {
+export const createCustomer = async (params: CustomerBody): Promise<{ id: number }> => {
   const { firstName, lastName, email, password, phone } = params
 
   if (password === undefined) {
@@ -54,5 +54,6 @@ export const createCustomer = async (params: CustomerBody): Promise<void> => {
 
   const values = [firstName, lastName, email, await bcrypt.hash(password, saltRounds), phone]
 
-  await db.query(sql, values, `createCustomer: DB error inserting customer.`)
+  const results = await db.query(sql, values, `createCustomer: DB error inserting customer.`)
+  return { id: results.rows[0].id }
 }

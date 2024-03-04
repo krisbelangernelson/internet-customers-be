@@ -30,7 +30,6 @@ export interface LoginResponse {
   email: string
   phone: string
   accessToken: string
-  code: string
 }
 
 export interface AccessToken {
