@@ -7,11 +7,10 @@ export const verifyToken = (req: Request, res: Response, next: NextFunction): vo
   // const token = req.headers['x-access-token']
   const cookies = req.cookies
   const token = cookies.accessToken as string
-  console.log('token', token)
 
   try {
     const decodedToken = tokenVerification(token)
-    console.log('decodedToken', decodedToken)
+
     if (decodedToken != null) {
       req.token = decodedToken
     }
