@@ -1,6 +1,6 @@
 import { createCustomer, getCustomerByEmail, getCustomerByPhone, getCustomerById } from '@/db/queries/customer'
 import type { CustomerBody, Login, LoginResponse, CustomerExists, AccessToken } from '@/types/customer'
-import { NotFoundError, InternalError } from '@/utils/httpErrors'
+import { NotFoundError } from '@/utils/httpErrors'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
@@ -47,9 +47,9 @@ export const customerExists = async (body: CustomerExists): Promise<{ emailExist
   return { emailExists: emailExists.length > 0, phoneExists: phoneExists.length > 0 }
 }
 
-export const customerArea = async (token: AccessToken | undefined): Promise<CustomerBody> => {
+export const customerArea = async (token: AccessToken | undefined): Promise<CustomerBody | object> => {
   if (token === undefined) {
-    throw new InternalError(undefined, undefined, 'Request.token is undefined')
+    return {}
   }
 
   const user = await getCustomerById(token.id)

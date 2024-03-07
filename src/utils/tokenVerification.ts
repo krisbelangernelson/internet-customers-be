@@ -4,7 +4,7 @@ import { type AccessToken } from '@/types/customer'
 
 export const tokenVerification = (token: string): AccessToken | null => {
   if (token === undefined) {
-    throw new ForbiddenError('No token provided')
+    return null
   }
 
   if (Array.isArray(token)) {
