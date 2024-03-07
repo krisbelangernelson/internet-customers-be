@@ -13,6 +13,23 @@ export const registerCustomer = async (req: Request, res: Response): Promise<voi
 }
 
 export const loginCustomer = async (req: Request, res: Response): Promise<void> => {
+  await customerService
+    .loginCustomer(req.body as Login)
+    .then((results) => {
+      const { accessToken } = results
+      res
+        .status(200)
+        .cookie('accessToken', accessToken, {
+          expires: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000),
+          secure: true,
+          httpOnly: true
+        })
+        .json(results)
+    })
+    .catch((error: Error) => errorResponses(res, error, 'loginCustomer'))
+}
+
+export const autoLoginCheck = (req: Request, res: Response): void => {
   const cookies = req.cookies
   const encodedToken = cookies.accessToken as string
 
@@ -24,20 +41,7 @@ export const loginCustomer = async (req: Request, res: Response): Promise<void> 
       accessToken: encodedToken
     })
   } else {
-    await customerService
-      .loginCustomer(req.body as Login)
-      .then((results) => {
-        const { accessToken } = results
-        res
-          .status(200)
-          .cookie('accessToken', accessToken, {
-            expires: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000),
-            secure: true,
-            httpOnly: true
-          })
-          .json(results)
-      })
-      .catch((error: Error) => errorResponses(res, error, 'loginCustomer'))
+    res.json()
   }
 }
 
