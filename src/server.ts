@@ -1,7 +1,4 @@
 /* eslint-disable import/first */
-process.env.NODE_ENV = 'development'
-process.env.APP_ENV = 'local'
-
 require('dotenv-override').config({ override: true }) // eslint-disable-line
 require('express-async-errors')
 import './utils/module-alias'
@@ -72,3 +69,5 @@ process.on('SIGTERM', () => {
   logger.info('SIGTERM shutting down')
   process.exit(0)
 })
+
+export default app

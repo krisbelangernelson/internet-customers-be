@@ -10,7 +10,6 @@ interface LoggingType {
 
 export interface ServerConfigType {
   port: number
-  debug: boolean
   basePath: string
   email: string
   logging: LoggingType

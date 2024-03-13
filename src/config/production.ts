@@ -6,16 +6,16 @@ export default {
   basePath: '/',
   email: 'admin@domain.com',
   logging: {
-    prettyPrint: true,
-    level: 'debug',
+    prettyPrint: false,
+    level: 'info',
     stringify: false,
-    humanReadableUnhandledException: true,
+    humanReadableUnhandledException: false,
     json: true,
-    colorize: true,
+    colorize: false,
     timestamp: true
   },
   cors: {
-    origin: 'http://localhost:8080',
+    origin: 'https://internet-provider-ui-pearl.vercel.app',
     credentials: true
   }
 } satisfies ServerConfigType
