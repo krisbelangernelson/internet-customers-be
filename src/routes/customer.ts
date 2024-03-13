@@ -5,7 +5,7 @@ import { verifyToken } from '@/middlewares/verify'
 
 const router = Router()
 
-router.post('/customer-exists', customerExists)
-router.get('/customer-area', verifyToken.verifyToken, customerArea)
+router.post('/exists', customerExists)
+router.get('/area', verifyToken.verifyToken, customerArea)
 
 export default router
