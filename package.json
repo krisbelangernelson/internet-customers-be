@@ -4,9 +4,9 @@
   "description": "Handles customer registration, authentication and authorization.",
   "main": "server.js",
   "scripts": {
-    "build": "set APP_ENV=production && tsc --outDir dist/production/",
-    "build:local": "set APP_ENV=local && tsc --outDir dist/local/",
-    "build:production": "set APP_ENV=production && tsc --outDir dist/production/",
+    "build": "set APP_ENV=production&& tsc --outDir dist/",
+    "build:local": "set APP_ENV=local&& tsc --outDir dist/",
+    "build:production": "set APP_ENV=production&& tsc --outDir dist/",
     "dev": "npx nodemon --watch src src/server.ts",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
