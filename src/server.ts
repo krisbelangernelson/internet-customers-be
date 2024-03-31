@@ -22,12 +22,13 @@ if (process.env.JWT_SECRET === undefined) {
   logger.error('Missing JWT_SECRET env var')
 }
 
+// @ts-expect-error type issues with cors whitelisting
 app.use(cors(config.cors))
 app.use(compression())
 app.disable('x-powered-by')
 app.use(express.json())
-app.use(cookieParser())
 app.use(express.urlencoded({ extended: true }))
+app.use(cookieParser())
 app.use(requestLogger())
 app.use(config.basePath, routes)
 app.use(errorLogger(logger))

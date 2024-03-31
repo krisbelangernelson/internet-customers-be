@@ -22,7 +22,8 @@ export const loginCustomer = async (req: Request, res: Response): Promise<void> 
         .cookie('accessToken', accessToken, {
           expires: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000),
           secure: true,
-          httpOnly: true
+          httpOnly: true,
+          sameSite: 'lax'
         })
         .json(results)
     })
@@ -41,12 +42,12 @@ export const autoLoginCheck = (req: Request, res: Response): void => {
       accessToken: encodedToken
     })
   } else {
-    res.json()
+    res.json({})
   }
 }
 
 export const logout = (_req: Request, res: Response): void => {
-  res.status(200).clearCookie('accessToken').json()
+  res.status(200).clearCookie('accessToken').json({})
 }
 
 export const customerExists = async (req: Request, res: Response): Promise<void> => {
