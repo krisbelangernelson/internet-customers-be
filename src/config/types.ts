@@ -17,7 +17,6 @@ export interface ServerConfigType {
   email: string
   logging: LoggingType
   cors: {
-    origin: (origin: string, callback: any) => void // eslint-disable-line @typescript-eslint/no-explicit-any
-    credentials: boolean
+    origin: string
   }
 }

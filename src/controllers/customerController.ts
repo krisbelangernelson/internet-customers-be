@@ -16,23 +16,15 @@ export const loginCustomer = async (req: Request, res: Response): Promise<void> 
   await customerService
     .loginCustomer(req.body as Login)
     .then((results) => {
-      const { accessToken } = results
       res
         .status(200)
-        .cookie('accessToken', accessToken, {
-          expires: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000),
-          secure: true,
-          httpOnly: true,
-          sameSite: 'lax'
-        })
         .json(results)
     })
     .catch((error: Error) => errorResponses(res, error, 'loginCustomer'))
 }
 
 export const autoLoginCheck = (req: Request, res: Response): void => {
-  const cookies = req.cookies
-  const encodedToken = cookies.accessToken as string
+  const encodedToken = String(req.headers.authorization).split('Bearer ')[1]
 
   if (encodedToken !== undefined) {
     const decodedToken = tokenVerification(encodedToken)
