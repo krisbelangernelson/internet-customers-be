@@ -25,8 +25,10 @@ export const loginCustomer = async (req: Request, res: Response): Promise<void> 
 }
 
 export const autoLoginCheck = (req: Request, res: Response): void => {
+  logger.info('autoLoginCheck')
   const encodedToken = String(req.headers.authorization).split('Bearer ')[1]
-
+  logger.info('encodedToken')
+  logger.info(encodedToken)
   if (encodedToken !== undefined) {
     const decodedToken = tokenVerification(encodedToken)
 
