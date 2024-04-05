@@ -4,7 +4,6 @@ import { errorResponses } from '@/utils/httpErrors/errorResponses'
 import { type Error } from '@/types/error'
 import type { CustomerBody, Login, CustomerExists } from '@/types/customer'
 import tokenVerification from '@/utils/tokenVerification'
-import logger from '@/utils/logger'
 
 export const registerCustomer = async (req: Request, res: Response): Promise<void> => {
   await customerService
@@ -25,10 +24,8 @@ export const loginCustomer = async (req: Request, res: Response): Promise<void> 
 }
 
 export const autoLoginCheck = (req: Request, res: Response): void => {
-  logger.info('autoLoginCheck')
   const encodedToken = String(req.headers.authorization).split('Bearer ')[1]
-  logger.info('encodedToken')
-  logger.info(encodedToken)
+
   if (encodedToken !== undefined) {
     const decodedToken = tokenVerification(encodedToken)
 
@@ -37,15 +34,8 @@ export const autoLoginCheck = (req: Request, res: Response): void => {
       accessToken: encodedToken
     })
   } else {
-    logger.info('sending...')
-    const data = { data: 'sent' }
-    logger.info(data)
     res.status(204).json({})
   }
-}
-
-export const logout = (_req: Request, res: Response): void => {
-  res.status(200).clearCookie('accessToken').json({})
 }
 
 export const customerExists = async (req: Request, res: Response): Promise<void> => {
