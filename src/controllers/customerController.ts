@@ -38,9 +38,9 @@ export const autoLoginCheck = (req: Request, res: Response): void => {
     })
   } else {
     logger.info('sending...')
-    const data = { message: 'sent' }
+    const data = { data: 'sent' }
     logger.info(data)
-    res.send(data)
+    res.status(204).json({})
   }
 }
 
