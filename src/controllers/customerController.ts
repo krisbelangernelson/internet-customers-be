@@ -4,6 +4,7 @@ import { errorResponses } from '@/utils/httpErrors/errorResponses'
 import { type Error } from '@/types/error'
 import type { CustomerBody, Login, CustomerExists } from '@/types/customer'
 import tokenVerification from '@/utils/tokenVerification'
+import logger from '@/utils/logger'
 
 export const registerCustomer = async (req: Request, res: Response): Promise<void> => {
   await customerService
@@ -34,7 +35,10 @@ export const autoLoginCheck = (req: Request, res: Response): void => {
       accessToken: encodedToken
     })
   } else {
-    res.json({ message: '' })
+    logger.info('sending...')
+    const data = { message: 'sent' }
+    logger.info(data)
+    res.send(data)
   }
 }
 
