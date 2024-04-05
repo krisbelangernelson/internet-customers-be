@@ -34,12 +34,8 @@ export const autoLoginCheck = (req: Request, res: Response): void => {
       accessToken: encodedToken
     })
   } else {
-    res.json({})
+    res.status(204).json({})
   }
-}
-
-export const logout = (_req: Request, res: Response): void => {
-  res.status(200).clearCookie('accessToken').json({})
 }
 
 export const customerExists = async (req: Request, res: Response): Promise<void> => {
