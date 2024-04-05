@@ -15,7 +15,6 @@ export default {
     timestamp: true
   },
   cors: {
-    origin: 'https://internet-provider-ui-pearl.vercel.app',
-    credentials: true
+    origin: '*'
   }
 } satisfies ServerConfigType
