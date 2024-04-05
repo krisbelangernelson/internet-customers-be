@@ -34,7 +34,7 @@ export const autoLoginCheck = (req: Request, res: Response): void => {
       accessToken: encodedToken
     })
   } else {
-    res.json({})
+    res.json({ message: '' })
   }
 }
 
