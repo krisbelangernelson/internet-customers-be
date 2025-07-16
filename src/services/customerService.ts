@@ -32,7 +32,7 @@ export const loginCustomer = async (body: Login): Promise<LoginResponse> => {
 
   return {
     accessToken,
-    id,
+    id: id.toString(),
     firstName,
     lastName,
     email,

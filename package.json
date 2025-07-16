@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Handles customer registration, authentication and authorization.",
   "main": "server.js",
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "build": "set APP_ENV=production&& tsc --outDir dist/",
     "build:local": "set APP_ENV=local&& tsc --outDir dist/",
